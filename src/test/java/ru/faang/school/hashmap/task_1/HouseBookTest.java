@@ -12,7 +12,6 @@ public class HouseBookTest {
 
     @BeforeEach
     void setUp(){
-
         houseBook = new HouseBook();
         houseBook.addNewHouse("Lannister", "A Lannister always pays his debts",
                 "a golden lion on a field of crimson");
@@ -26,44 +25,57 @@ public class HouseBookTest {
     void addNewHouseTest(){
         String result = houseBook.addNewHouse(
                 "Targaryen", "Fire And Blood", "a three-headed dragon breathing flames");
-        assertEquals(4, houseBook.getHouseBookSize());
-        assertEquals("A house Targaryen added to the book. Houses in the book: 4.", result);
+        String houseName = "Targaryen";
+        int expectedHouseBookSize = 4;
+
+        assertEquals(expectedHouseBookSize, houseBook.getHouseBookSize());
+        assertEquals("A house " + houseName + " added to the book. Houses in the book: "
+                + expectedHouseBookSize + ".", result);
     }
 
     @Test
     void addNewHouseExistingInBookTest(){
+        String houseName = "Stark";
+
         HouseBookException exception = assertThrows(HouseBookException.class,
                 () -> houseBook.addNewHouse("Stark", "Winter is coming",
                 "a grey direwolf on a white background"));
 
-        assertEquals("The house Stark already exists in the book.", exception.getMessage());
+        assertEquals("The house " + houseName + " already exists in the book.", exception.getMessage());
     }
 
     @Test
     void getHouseSigilTest(){
         String result = houseBook.getHouseSigil("Stark");
+
         assertEquals("a grey direwolf on a white background", result);
     }
 
     @Test
     void getNotExistingHouseSigilTest(){
+        String houseName = "Martell";
         HouseBookException exception = assertThrows(HouseBookException.class,
-                () -> houseBook.getHouseSigil("Martell"));
-        assertEquals("The house Martell doesn't exist in the book.", exception.getMessage());
+                () -> houseBook.getHouseSigil(houseName));
+        assertEquals("The house " + houseName + " doesn't exist in the book.", exception.getMessage());
     }
 
     @Test
     void deleteHouseTest(){
-        String result = houseBook.deleteHouse("Stark");
-        assertEquals(2, houseBook.getHouseBookSize());
-        assertEquals("A house Stark deleted from the book. Houses in the book: 2.", result);
+        String houseName = "Stark";
+        String result = houseBook.deleteHouse(houseName);
+        int expectedHouseBookSize = 2;
+
+        assertEquals(expectedHouseBookSize, houseBook.getHouseBookSize());
+        assertEquals("A house " + houseName + " deleted from the book. Houses in the book: "
+                + expectedHouseBookSize + ".", result);
     }
 
     @Test
     void deleteNotExistingHouse(){
-        assertThrows(HouseBookException.class, () -> houseBook.deleteHouse("Martell"));
+        String houseName = "Martell";
+
         HouseBookException exception = assertThrows(
-                HouseBookException.class, () -> houseBook.deleteHouse("Martell"));
-        assertEquals("The house Martell doesn't exist in the book.", exception.getMessage());
+                HouseBookException.class, () -> houseBook.deleteHouse(houseName));
+        assertEquals("The house " + houseName + " doesn't exist in the book.", exception.getMessage());
     }
 }
