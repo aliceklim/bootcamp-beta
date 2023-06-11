@@ -8,8 +8,10 @@ import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
-@NonNull
 public class Author {
+
+    private String firstName;
+    private String lastName;
 
     @Override
     public boolean equals(Object o) {
@@ -23,8 +25,5 @@ public class Author {
     public int hashCode() {
         return Objects.hash(firstName, lastName);
     }
-
-    private String firstName;
-    private String lastName;
 
 }

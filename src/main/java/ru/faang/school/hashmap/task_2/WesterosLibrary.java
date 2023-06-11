@@ -18,10 +18,6 @@ public class WesterosLibrary {
         return String.format(Message.BOOK_ADDED, newBook, library.size());
     }
 
-    private String assignRow(String surname){
-        return "row " + surname.charAt(0);
-    }
-
     public String deleteBook(String title, Author author, int year){
         Book book = new Book(title, author, year);
         if (!library.containsKey(book)){
@@ -50,5 +46,9 @@ public class WesterosLibrary {
 
     public int getLibrarySize(){
         return library.size();
+    }
+
+    private String assignRow(String surname){
+        return "row " + surname.charAt(0);
     }
 }

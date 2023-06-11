@@ -10,7 +10,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @AllArgsConstructor
-@NonNull
 public class Book {
 
     private String title;

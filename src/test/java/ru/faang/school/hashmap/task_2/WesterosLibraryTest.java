@@ -22,10 +22,12 @@ public class WesterosLibraryTest {
 
     @Test
     void addNewBookTest(){
-        String result = westerosLibrary.addBook("The Witcher", new Author("Anjey", "Sapkowsky"), 1986);
-        int expectedLibrarySize = westerosLibrary.getLibrarySize();
+        int expectedLibrarySize = 3;
+        String expected = String.format(Message.BOOK_ADDED, witcherBook, expectedLibrarySize);
 
-        assertEquals(String.format(Message.BOOK_ADDED, witcherBook, expectedLibrarySize), result);
+        String result = westerosLibrary.addBook("The Witcher", new Author("Anjey", "Sapkowsky"), 1986);
+
+        assertEquals(expected, result);
     }
 
     @Test
@@ -38,10 +40,12 @@ public class WesterosLibraryTest {
 
     @Test
     void deleteExistingBookTest() {
-        String result = westerosLibrary.deleteBook("Gunslinger", new Author("Stephen", "King"), 1990);
         int expectedLibrarySize = 1;
+        String expected = String.format(Message.BOOK_DELETED, gunslingerBook, expectedLibrarySize);
 
-        assertEquals(String.format(Message.BOOK_DELETED, gunslingerBook, expectedLibrarySize), result);
+        String result = westerosLibrary.deleteBook("Gunslinger", new Author("Stephen", "King"), 1990);
+
+        assertEquals(expected, result);
     }
 
 
